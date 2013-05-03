@@ -187,10 +187,14 @@ var Maze = function() {
 			sg.sId = id;
 			return false;
 		} else {
-			sg.gId = id;
-			startNodeId = sg.sId;
-			goalNodeId = sg.gId;
-			return true;
+			if (id === sg.sId) {
+				return false;
+			} else {
+				sg.gId = id;
+				startNodeId = sg.sId;
+				goalNodeId = sg.gId;
+				return true;
+			}
 		}
 	};
 
