@@ -1,0 +1,57 @@
+div#all{
+	width:750px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0px;
+	position:relative;
+}
+html{
+	overflow-y:scroll;
+}
+.page-title{
+	margin: 0 0 0.3em 0;
+	padding: 0;
+}
+.page-title-note{
+	margin: 0 0 1em 1em;
+	padding: 0;
+}
+
+#areaSVG{
+	margin: 0 0 0 1.5em;
+	padding: 0;
+	display:none;
+}
+#areaTextarea{
+	margin: 0 0 0 1.5em;
+	padding: 0;
+	display:block;
+}
+#textMaze{
+	margin: 0 0 0 1.5em;
+	padding: 0;
+}
+
+ul{
+	margin: 0.5em 0 0 2em;
+	padding: 0;
+}
+.note1{
+	font-size:medium;
+}
+.note2{
+	font-size:small;
+}
+
+.viewMsg{
+	color:#ff0000;
+}
+.height-dummy{
+	height:30px;
+}
+.btn{
+	font-size:large;
+	width:200px;
+	height:30px;
+	cursor: pointer;
+}

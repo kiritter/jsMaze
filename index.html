@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Octocat goes through a maze! (JavaScript SVG Example)</title>
+<link rel="stylesheet" href="main.css" type="text/css">
+</head>
+
+<body>
+<div id="all">
+<article>
+<header>
+	<h1 class="page-title">Octocat goes through a maze! (JavaScript SVG Example)</h1>
+	<p class="page-title-note">(Octocat is a registered trademark of GitHub)</p>
+</header>
+
+<section>
+<div id="areaSVG">
+	<div class="height-dummy">
+		<input type="button" id="btnGo" class="btn" value="Go through this maze!">
+		<input type="button" id="btnClear" class="btn" value="Clear">
+		<span id="viewMsg2" class="viewMsg"></span>
+	</div>
+	<ul>
+		<li class="note1">Click a wall, it switches to a path.</li>
+		<li class="note1">Click a path, it switches to a wall.</li>
+	</ul>
+	<div id="svgRoot"></div>
+</div>
+
+<div id="areaTextarea">
+	<input type="button" id="btnDraw" class="btn" value="Draw this maze!">
+	<span id="viewMsg1" class="viewMsg"></span>
+	<ul>
+		<li class="note1">'■' means a wall. <span class="note2">(U+25A0 : BLACK SQUARE)</span></li>
+		<li class="note1">'　' means a path. <span class="note2">(U+3000 : IDEOGRAPHIC SPACE)</span></li>
+	</ul>
+	<br>
+	<textarea id="textMaze" cols="66" rows="22">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+■■　■■　　　■　　　　　　　　　　■　　　■　　　　　■■■
+■　　　　　■　　　■　■　■■■■　■　■■■　■■■　■　■
+■　■■■　■■■■■　■　■■■■　■　■　　　　　■　　　■
+■　　　　　■　　　■　■　　　　■　■　■　■■■　■　■　■
+■■■■■　　　■　■■■■■■　■■■　■　　　■　■■■　■
+■　　　■■■　■　　　　　■■　　　■　■■■　■　■　■　■
+■　■■■　■　■■■■■■　■■■　　　　　■　■　　　　　■
+■　　　　　■　　■　　　■　　　　■■　■　■　■　■　■　■
+　　■　■■■■　■■　■■　■　■　■　■　■　■■■　■■■
+■　■　■　　　　　■　　　　■　　　■■■　　　■　■　　　■
+■　■　■■■　■■■　■■■■　■　　　■　■　■　　　■　■
+■　　　■　　　■　■　　　　　　■　■　■■■■■■■　■　■
+■■■　■■■　■　■　　■　■■■　■　　　■　■■■■■　■
+■　　　　　　　■　　■　■　■　　　■　■　■　■■■　　　■
+■　■■■■■■■　■■　■■■■■　■　■　■　■　■　■■■
+■　　　　■　　　　■　　　　　■■■■　■　　　■　■　■　■
+■　■■■■　■■　■■■■　　　　■■■■■■　■　　　■　■
+■■　　　　　　■　　　　　■■■　　　　■　　　　　■　■　■
+■■　■■　■■■■■　■　　　　　■■■■■■　　■■■■■■
+■■■■■　■■■■■■■■■■■■■■■■■■■■■■■■■■
+</textarea>
+</div>
+</section>
+
+<br>
+<footer>
+	<table>
+	<tr>
+		<td>GitHub Code</td>
+		<td> : <a target="_blank" href="https://github.com/kiritter/jsMaze">https://github.com/kiritter/jsMaze</a></td>
+	</tr>
+	<tr>
+		<td>Blog Page</td>
+		<td> : <a target="_blank" href="http://kiritter.hatenablog.com/">http://kiritter.hatenablog.com/</a></td>
+	</tr>
+	<tr>
+		<td>Twitter</td>
+		<td> : <a class="kiritter" target="_blank" href="https://twitter.com/kiritter">@kiritter</a></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-via="kiritter" data-lang="ja">ツイート</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</td>
+	</tr>
+	</table>
+</footer>
+
+</article>
+</div>
+
+<script src="main.js"></script>
+<script src="Maze.js"></script>
+<script src="MazeView.js"></script>
+<script src="lib/jquery-1.9.1.min.js"></script>
+</body>
+</html>
