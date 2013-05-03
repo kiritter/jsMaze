@@ -8,7 +8,8 @@ var MazeView = function() {
 	var SN = "http://www.w3.org/2000/svg";
 	var g1 = null;
 	var SVG_WIDTH = 690;
-	var SVG_HEIGHT = 450;
+//	var SVG_HEIGHT = 455;
+	var SVG_HEIGHT = 0;
 
 	var BLOCK_SIDE = 20;
 
@@ -16,13 +17,14 @@ var MazeView = function() {
 	var OCTOCAT_OFFSET_X = BLOCK_SIDE * -1 -3;
 	var OCTOCAT_OFFSET_Y = BLOCK_SIDE * -2 -2;
 
-	var drawMaze = function(graph, wallList, startNodeId, goalNodeId) {
+	var drawMaze = function(graph, mazeRowNum, wallList, startNodeId, goalNodeId) {
 		if (!document.createElementNS) {
 			return;
 		}
 
 		//------------------------------
 		var root = document.getElementById("svgRoot");
+		SVG_HEIGHT = mazeRowNum * BLOCK_SIDE + 35;
 		drawSvgAndGroup(root);
 
 		//------------------------------
@@ -292,8 +294,8 @@ var MazeView = function() {
 			handlers = obj;
 		}
 
-		, updateForCreate: function(graph, wallList, startNodeId, goalNodeId) {
-			drawMaze(graph, wallList, startNodeId, goalNodeId);
+		, updateForCreate: function(graph, mazeRowNum, wallList, startNodeId, goalNodeId) {
+			drawMaze(graph, mazeRowNum, wallList, startNodeId, goalNodeId);
 		}
 
 		, updateForSwitchToNode: function(wallId) {

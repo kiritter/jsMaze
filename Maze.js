@@ -7,10 +7,10 @@ var Maze = function() {
 	var addObserver = function(observer) {
 		observers.push(observer);
 	};
-	var notifyObserversOfCreate = function(graph, wallList, startNodeId, goalNodeId) {
+	var notifyObserversOfCreate = function() {
 		var len = observers.length;
 		for (var i = 0; i < len; i++) {
-			observers[i].updateForCreate(graph, wallList, startNodeId, goalNodeId);
+			observers[i].updateForCreate(graph, mazeRowNum, wallList, startNodeId, goalNodeId);
 		}
 	};
 	var notifyObserversOfSwitchToNode = function(wallId) {
@@ -50,8 +50,8 @@ var Maze = function() {
 	}
 
 	var textMazeArray = null;
-	var heightMaze = 0;
-	var widthMaze = 0;
+	var mazeRowNum = 0;
+	var mazeColNum = 0;
 
 	//Node
 	var graph = [];
@@ -88,9 +88,9 @@ var Maze = function() {
 		}
 
 		textMazeArray = textMaze.split(LINE_SEPARATOR);
-		heightMaze = textMazeArray.length;
+		mazeRowNum = textMazeArray.length;
 
-		if (heightMaze > MAX_ROW_NUM) {
+		if (mazeRowNum > MAX_ROW_NUM) {
 			errMsg = "Rows must be '<= " + MAX_ROW_NUM + "'.";
 			return errMsg;
 		}
@@ -99,14 +99,14 @@ var Maze = function() {
 		var beforeWidth;
 		var width;
 		var c;
-		for (var i = 0; i < heightMaze; i++) {
+		for (var i = 0; i < mazeRowNum; i++) {
 			row = textMazeArray[i];
 			width = row.length;
 			if (width > MAX_COL_NUM) {
 				errMsg = "Cols must be '<= " + MAX_COL_NUM + "'.";
 				return errMsg;
 			}
-			if (i !== 0 && i !== heightMaze-1 && width !== beforeWidth) {
+			if (i !== 0 && i !== mazeRowNum-1 && width !== beforeWidth) {
 				errMsg = "Cols must be the same length.";
 				return errMsg;
 			}
@@ -120,7 +120,7 @@ var Maze = function() {
 			}
 		}
 
-		widthMaze = textMazeArray[0].length;
+		mazeColNum = textMazeArray[0].length;
 
 		if (findStartAndGoal() === false) {
 			errMsg = "Start or Goal is not found.";
@@ -140,7 +140,7 @@ var Maze = function() {
 		var ret = false;
 
 		//Left
-		for (var i = 0; i < heightMaze; i++) {
+		for (var i = 0; i < mazeRowNum; i++) {
 			c = textMazeArray[i].charAt(0);
 			if (c === PATH) {
 				ret = setSg(sg, "" + i + "_" + "0");
@@ -150,7 +150,7 @@ var Maze = function() {
 			}
 		}
 		//Top
-		for (var j = 0; j < widthMaze; j++) {
+		for (var j = 0; j < mazeColNum; j++) {
 			c = textMazeArray[0].charAt(j);
 			if (c === PATH) {
 				ret = setSg(sg, "" + "0" + "_" + j);
@@ -160,20 +160,20 @@ var Maze = function() {
 			}
 		}
 		//Bottom
-		for (var j = 0; j < widthMaze; j++) {
-			c = textMazeArray[heightMaze-1].charAt(j);
+		for (var j = 0; j < mazeColNum; j++) {
+			c = textMazeArray[mazeRowNum-1].charAt(j);
 			if (c === PATH) {
-				ret = setSg(sg, "" + (heightMaze-1) + "_" + j);
+				ret = setSg(sg, "" + (mazeRowNum-1) + "_" + j);
 				if (ret === true) {
 					return true;
 				}
 			}
 		}
 		//Right
-		for (var i = 0; i < heightMaze; i++) {
-			c = textMazeArray[i].charAt(widthMaze-1);
+		for (var i = 0; i < mazeRowNum; i++) {
+			c = textMazeArray[i].charAt(mazeColNum-1);
 			if (c === PATH) {
-				ret = setSg(sg, "" + i + "_" + (widthMaze-1));
+				ret = setSg(sg, "" + i + "_" + (mazeColNum-1));
 				if (ret === true) {
 					return true;
 				}
@@ -205,15 +205,15 @@ var Maze = function() {
 		var edge = null;
 		var wall = null;
 
-		for (var i = 0; i < heightMaze; i++) {
-			for (var j = 0; j < widthMaze; j++) {
+		for (var i = 0; i < mazeRowNum; i++) {
+			for (var j = 0; j < mazeColNum; j++) {
 				c = textMazeArray[i].charAt(j);
 
 				if (c === PATH) {
 					node = new Node();
 					node.id = "" + i + "_" + j;
 
-					if (i === 0 || i === heightMaze-1 || j === 0 || j === widthMaze-1) {
+					if (i === 0 || i === mazeRowNum-1 || j === 0 || j === mazeColNum-1) {
 						node.border = true;
 					} else {
 						node.border = false;
@@ -228,7 +228,7 @@ var Maze = function() {
 					wall = new Wall();
 					wall.id = "" + i + "_" + j;
 
-					if (i === 0 || i === heightMaze-1 || j === 0 || j === widthMaze-1) {
+					if (i === 0 || i === mazeRowNum-1 || j === 0 || j === mazeColNum-1) {
 						wall.border = true;
 					} else {
 						wall.border = false;
@@ -260,7 +260,7 @@ var Maze = function() {
 			}
 		}
 		//Down
-		if (i < heightMaze-1) {
+		if (i < mazeRowNum-1) {
 			if (textMazeArray[i+1].charAt(j) === PATH) {
 				if (mode === "create") {
 					edge = createEdge(i+1, j);
@@ -292,7 +292,7 @@ var Maze = function() {
 			}
 		}
 		//Right
-		if (j < widthMaze-1) {
+		if (j < mazeColNum-1) {
 			if (textMazeArray[i].charAt(j+1) === PATH) {
 				if (mode === "create") {
 					edge = createEdge(i, j+1);
@@ -495,7 +495,7 @@ var Maze = function() {
 			}
 
 			createGraph();
-			notifyObserversOfCreate(graph, wallList, startNodeId, goalNodeId);
+			notifyObserversOfCreate();
 		}
 
 		, getShortestPath: function() {
