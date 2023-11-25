@@ -3,4 +3,4 @@ jsMaze
 
 Octocat goes through a maze! : JavaScript MVC SVG Example
 
-The example page => http://kiritter.github.io/jsMaze/
+The example page => https://kiritter.github.io/jsMaze/
