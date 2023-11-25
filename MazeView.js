@@ -14,8 +14,8 @@ var MazeView = function() {
 	var BLOCK_SIDE = 20;
 
 	var startNodeIdForOctocat;
-	var OCTOCAT_OFFSET_X = BLOCK_SIDE * -1 -3;
-	var OCTOCAT_OFFSET_Y = BLOCK_SIDE * -2 -2;
+	var OCTOCAT_OFFSET_X = (44 / 4) * -1;
+	var OCTOCAT_OFFSET_Y = (44 / 6) * -2;
 
 	var drawMaze = function(graph, mazeRowNum, wallList, startNodeId, goalNodeId) {
 		if (!document.createElementNS) {
@@ -95,7 +95,7 @@ var MazeView = function() {
 			g1.removeChild(elem);
 		}
 		var pos = getPosFromId(startNodeIdForOctocat);
-		drawImage("octocat", pos.x, pos.y, 66, "img/Octocat.png");
+		drawImage("octocat", pos.x, pos.y, 44, "img/bat_128.png");
 	};
 	var moveOctocat = function(id) {
 		var pos = getPosFromId(id);
